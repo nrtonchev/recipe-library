@@ -12,11 +12,11 @@
         <li class="nav-item"><a class="nav-link" href="#" (click)="onSelect('ShoppingList')">Shopping List</a></li>
       </ul>
       <ul class="navbar-nav navbar-right">
-        <li class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Manage</a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Save Data</a></li>
-            <li><a class="dropdown-item" href="#">Fetch Data</a></li>
+        <li class="nav-item" ngbDropdown display="dynamic">
+          <a href="#" class="nav-link" role="button" ngbDropdownToggle id="dropdownHeaderMenu">Manage</a>
+          <ul ngbDropdownMenu aria-labelledby="dropdownHeaderMenu">
+            <li><a ngbDropdownItem href="#">Save Data</a></li>
+            <li><a ngbDropdownItem href="#">Fetch Data</a></li>
           </ul>
         </li>
       </ul>
