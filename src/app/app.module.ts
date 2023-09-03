@@ -12,6 +12,8 @@ import { ShoppingListEditComponent } from './shopping-list/shopping-list/shoppin
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { RecipeBookComponent } from './recipe-book/recipe-book.component';
+import { NoRecipeSelectedComponent } from './recipe-book/no-recipe-selected/no-recipe-selected.component';
+import { EditRecipeComponent } from './recipe-book/edit-recipe/edit-recipe.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { RecipeBookComponent } from './recipe-book/recipe-book.component';
     ShoppingListComponent,
     ShoppingListEditComponent,
     HeaderComponent,
-    RecipeBookComponent
+    RecipeBookComponent,
+    NoRecipeSelectedComponent,
+    EditRecipeComponent
   ],
   imports: [
     BrowserModule,

@@ -17,9 +17,9 @@
         Manage Recipe
       </button>
       <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton">
-        <li><a ngbDropdownItem href="#" (click)="addToShoppingList()">Add to Shopping List</a></li>
-        <li><a ngbDropdownItem href="#">Edit Recipe</a></li>
-        <li><a ngbDropdownItem href="#">Delite Recipe</a></li>
+        <li><a ngbDropdownItem style="cursor: pointer;" (click)="addToShoppingList()">Add to Shopping List</a></li>
+        <li><a ngbDropdownItem style="cursor: pointer;" [routerLink]="['edit-recipe']">Edit Recipe</a></li>
+        <li><a ngbDropdownItem style="cursor: pointer;">Delite Recipe</a></li>
       </ul>
     </div>
   </div>
