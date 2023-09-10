@@ -19,7 +19,7 @@
       <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton">
         <li><a ngbDropdownItem style="cursor: pointer;" (click)="addToShoppingList()">Add to Shopping List</a></li>
         <li><a ngbDropdownItem style="cursor: pointer;" [routerLink]="['edit-recipe']">Edit Recipe</a></li>
-        <li><a ngbDropdownItem style="cursor: pointer;">Delite Recipe</a></li>
+        <li><a ngbDropdownItem style="cursor: pointer;" (click)="onRecipeDelete()">Delete Recipe</a></li>
       </ul>
     </div>
   </div>
