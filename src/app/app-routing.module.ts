@@ -6,6 +6,7 @@ import { RecipeItemDetailComponent } from './recipe-book/recipe-item/recipe-item
 import { NoRecipeSelectedComponent } from './recipe-book/no-recipe-selected/no-recipe-selected.component';
 import { EditRecipeComponent } from './recipe-book/edit-recipe/edit-recipe.component';
 import { recipesResolver } from './shared/recipes.resolver';
+import { AuthComponent } from './auth/auth/auth.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'recipe-book', pathMatch: 'full' },
@@ -15,7 +16,8 @@ const routes: Routes = [
     { path: ':id/edit-recipe', resolve: {data: recipesResolver}, component: EditRecipeComponent },
     { path: ':id', resolve: {data: recipesResolver}, component: RecipeItemDetailComponent },
   ] },
-  { path: 'shopping-list', component: ShoppingListComponent }
+  { path: 'shopping-list', component: ShoppingListComponent },
+  { path: 'auth', component: AuthComponent }
 ];
 
 @NgModule({

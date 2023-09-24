@@ -15,6 +15,7 @@ import { HeaderComponent } from './header/header.component';
 import { RecipeBookComponent } from './recipe-book/recipe-book.component';
 import { NoRecipeSelectedComponent } from './recipe-book/no-recipe-selected/no-recipe-selected.component';
 import { EditRecipeComponent } from './recipe-book/edit-recipe/edit-recipe.component';
+import { AuthComponent } from './auth/auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { EditRecipeComponent } from './recipe-book/edit-recipe/edit-recipe.compo
     HeaderComponent,
     RecipeBookComponent,
     NoRecipeSelectedComponent,
-    EditRecipeComponent
+    EditRecipeComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
