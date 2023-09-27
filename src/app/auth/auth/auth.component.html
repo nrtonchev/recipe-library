@@ -1,6 +1,12 @@
 <div class="row">
     <div class="col col-md-6 offset-md-3">
-        <form [formGroup]="signUpForm" (ngSubmit)="onSubmitForm()">
+      <div class="alert alert-danger" *ngIf="error">
+        <p id="alert">{{error}}</p>
+      </div>
+        <div id="spinner" *ngIf="isLoading">
+          <app-loading-spinner></app-loading-spinner>
+        </div>
+        <form [formGroup]="signUpForm" (ngSubmit)="onSubmitForm()" *ngIf="!isLoading">
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" id="email" formControlName="authEmail">

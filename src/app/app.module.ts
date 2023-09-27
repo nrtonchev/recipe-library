@@ -16,6 +16,7 @@ import { RecipeBookComponent } from './recipe-book/recipe-book.component';
 import { NoRecipeSelectedComponent } from './recipe-book/no-recipe-selected/no-recipe-selected.component';
 import { EditRecipeComponent } from './recipe-book/edit-recipe/edit-recipe.component';
 import { AuthComponent } from './auth/auth/auth.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { AuthComponent } from './auth/auth/auth.component';
     RecipeBookComponent,
     NoRecipeSelectedComponent,
     EditRecipeComponent,
-    AuthComponent
+    AuthComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,

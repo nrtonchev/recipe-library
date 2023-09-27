@@ -1,19 +1,20 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
-import { AuthService } from '../auth.service';
-import { Subscription } from 'rxjs';
+import { AuthResponseData, AuthService } from '../auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
-export class AuthComponent implements OnInit, OnDestroy {
+export class AuthComponent implements OnInit {
   isLoginMode = true;
+  isLoading = false;
+  error: string = null;
   buttonLabel = 'Login';
   signUpForm: FormGroup;
-  subscription: Subscription;
   
   constructor(private route: ActivatedRoute, private authService: AuthService){}
 
@@ -31,26 +32,34 @@ export class AuthComponent implements OnInit, OnDestroy {
     if(!this.signUpForm.valid){
       return;
     }
+
+    this.error = null;
     
     let email = this.signUpForm.value.authEmail;
     let password = this.signUpForm.value.authPass;
+    let authObs: Observable<AuthResponseData>;
     
+    this.isLoading = true;
     if(this.isLoginMode){
-
+      authObs = this.authService.login(email, password);
     }
     else{
-      this.subscription = this.authService.signUp(email, password)
-        .subscribe({
-          next: (responseData) => console.log(responseData),
-          error: (error) => console.log(error)
-        });
+      authObs = this.authService.signUp(email, password);
     }
+
+    authObs.subscribe({
+      next: (responseData) => {
+        console.log(responseData);
+        this.isLoading = false;
+      },
+      error: (errorMessage) => {
+        console.log(errorMessage);
+        this.error = errorMessage;
+        this.isLoading = false;
+      }
+    });
     
     this.signUpForm.reset();
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 
   private InitForm(){
