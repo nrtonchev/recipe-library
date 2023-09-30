@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AuthResponseData, AuthService } from '../auth.service';
 import { Observable } from 'rxjs';
 
@@ -16,7 +16,7 @@ export class AuthComponent implements OnInit {
   buttonLabel = 'Login';
   signUpForm: FormGroup;
   
-  constructor(private route: ActivatedRoute, private authService: AuthService){}
+  constructor(private route: ActivatedRoute, private authService: AuthService, private router:Router){}
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -51,6 +51,7 @@ export class AuthComponent implements OnInit {
       next: (responseData) => {
         console.log(responseData);
         this.isLoading = false;
+        this.router.navigate(['/recipe-book']);
       },
       error: (errorMessage) => {
         console.log(errorMessage);

@@ -1,20 +1,25 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, throwError } from 'rxjs';
+import { BehaviorSubject, Subject, catchError, tap, throwError } from 'rxjs';
+import { User } from './user.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  user = new BehaviorSubject<User>(null);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   signUp(email: string, password: string){
     return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAfXI-XR1IVe6pzr17SCiNlQMiLUfVI2-s', {
       email: email,
       password: password,
       returnSecureToken: true
-    }).pipe(catchError(this.handleError));
+    }).pipe(catchError(this.handleError), tap(resData => {
+      this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
+    }));
   }
 
   login(email: string, password: string){
@@ -22,7 +27,14 @@ export class AuthService {
       email: email,
       password: password,
       returnSecureToken: true
-    }).pipe(catchError(this.handleError));
+    }).pipe(catchError(this.handleError), tap(resData => {
+      this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
+    }));
+  }
+
+  logout(){
+    this.user.next(null);
+    this.router.navigate(['/auth']);
   }
 
   private handleError(errorResponse: HttpErrorResponse){
@@ -43,6 +55,12 @@ export class AuthService {
     return throwError(() => {
       return new Error(errorMessage)
     });
+  }
+
+  private handleAuthentication(email: string, userId: string, token: string, expiresIn: number){
+    const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
+    const user = new User(email, userId, token, expirationDate);
+    this.user.next(user);
   }
 }
 
