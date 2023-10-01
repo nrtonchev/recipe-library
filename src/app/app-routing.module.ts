@@ -7,10 +7,11 @@ import { NoRecipeSelectedComponent } from './recipe-book/no-recipe-selected/no-r
 import { EditRecipeComponent } from './recipe-book/edit-recipe/edit-recipe.component';
 import { recipesResolver } from './shared/recipes.resolver';
 import { AuthComponent } from './auth/auth/auth.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'recipe-book', pathMatch: 'full' },
-  { path: 'recipe-book', component: RecipeBookComponent, children: [
+  { path: 'recipe-book', canActivate: [AuthGuard], component: RecipeBookComponent, children: [
     { path: '', component: NoRecipeSelectedComponent },
     { path: 'new-recipe', component: EditRecipeComponent },
     { path: ':id/edit-recipe', resolve: {data: recipesResolver}, component: EditRecipeComponent },
